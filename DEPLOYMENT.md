@@ -25,12 +25,29 @@ The API needs to run somewhere. **Render** (free tier) works well:
 
 ## 3. Deploy Frontend (Vercel)
 
-1. Go to [vercel.com](https://vercel.com) → Add New Project
+### Option A: Vercel Dashboard (no CLI)
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project**
 2. Import your GitHub repo
-3. Settings:
-   - **Root Directory**: `frontend`
-   - **Environment Variable**: `VITE_API_URL` = your backend URL (e.g. `https://your-app.onrender.com/api`)
-4. Deploy
+3. Configure:
+   - **Root Directory**: `frontend` (click Edit, set to `frontend`)
+   - **Environment Variable**: Add `VITE_API_URL` = `https://YOUR-RENDER-APP.onrender.com/api` (your backend URL)
+4. Click **Deploy**
+
+### Option B: Vercel CLI
+
+```bash
+cd frontend
+vercel login      # one-time: follow browser prompt
+vercel            # deploy preview
+vercel --prod     # deploy to production
+```
+
+Before deploying, set the API URL in Vercel project settings, or pass it:
+
+```bash
+VITE_API_URL=https://YOUR-BACKEND.onrender.com/api vercel --prod
+```
 
 The frontend will call `VITE_API_URL` for API requests. Ensure your backend CORS allows the Vercel domain (`*.vercel.app`).
 
