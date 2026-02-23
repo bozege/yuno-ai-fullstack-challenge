@@ -185,19 +185,21 @@ async def seed_default_strategy(session: AsyncSession) -> None:
     print("Seeded default retry strategy.")
 
 
-async def run_seed():
-    """Main entry: init DB, seed data."""
-    await init_db()
-
+async def ensure_seeded():
+    """Seed DB if empty. Call from app startup (e.g. lifespan)."""
     async with AsyncSessionLocal() as session:
-        # Check if already seeded
         count_result = await session.execute(select(func.count()).select_from(Payment))
         if count_result.scalar() > 0:
-            print("Database already seeded. Skipping.")
             return
-
         await seed_payments(session, count=180)
         await seed_default_strategy(session)
+        print("Seeded payments and default strategy.")
+
+
+async def run_seed():
+    """Standalone: init DB, seed data. For local `python -m app.seed_data`."""
+    await init_db()
+    await ensure_seeded()
 
 
 if __name__ == "__main__":

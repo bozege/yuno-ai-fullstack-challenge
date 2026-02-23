@@ -13,8 +13,10 @@ from app.routers import analytics, payments, retry
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup: init DB and ensure default strategy exists."""
+    """Startup: init DB, seed if empty, ensure default strategy exists."""
     await init_db()
+    from app.seed_data import ensure_seeded
+    await ensure_seeded()
     yield
     # Shutdown if needed
 

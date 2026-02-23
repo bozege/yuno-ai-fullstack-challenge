@@ -6,9 +6,12 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sess
 from sqlalchemy.orm import DeclarativeBase
 
 # SQLite URL - use aiosqlite for async support
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "sqlite+aiosqlite:///./kijani_retry.db"
+# Only use DATABASE_URL if it's SQLite (Render may set postgres URL when a DB exists)
+_raw = os.getenv("DATABASE_URL", "")
+DATABASE_URL = (
+    _raw
+    if _raw and "sqlite" in _raw.lower()
+    else "sqlite+aiosqlite:///./kijani_retry.db"
 )
 
 engine = create_async_engine(
