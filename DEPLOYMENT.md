@@ -38,7 +38,7 @@ git push -u origin main
 2. Import your GitHub repo
 3. Configure:
    - **Root Directory**: `frontend` (click Edit, set to `frontend`)
-   - **Environment Variable**: Add `VITE_API_URL` = `https://YOUR-RENDER-APP.onrender.com/api` (e.g. `https://kijani-retry-api.onrender.com/api`)
+   - **Environment Variable**: Add `VITE_API_URL` = `https://kijani-retry-api.onrender.com/api` (or your Render URL; `/api` is auto-appended if omitted)
 4. Click **Deploy**
 
 ### Option B: Vercel CLI
