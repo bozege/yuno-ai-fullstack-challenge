@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-kijani-50: #ecfdf5;
+  --color-kijani-100: #d1fae5;
+  --color-kijani-200: #a7f3d0;
+  --color-kijani-300: #6ee7b7;
+  --color-kijani-400: #34d399;
+  --color-kijani-500: #10b981;
+  --color-kijani-600: #059669;
+  --color-kijani-700: #047857;
+  --color-kijani-800: #065f46;
+  --color-kijani-900: #064e3b;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
