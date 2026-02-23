@@ -9,19 +9,26 @@ git branch -M main
 git push -u origin main
 ```
 
-## 2. Deploy Backend (Render / Railway / Fly.io)
+## 2. Deploy Backend (Render)
 
-The API needs to run somewhere. **Render** (free tier) works well:
+**Option A: Blueprint (one-click)**
 
-1. Go to [render.com](https://render.com) → New → Web Service
+1. Go to [render.com](https://render.com) → **New** → **Blueprint**
+2. Connect your GitHub repo
+3. Render reads `render.yaml` and creates the backend service
+4. Deploy. Note the URL (e.g. `https://kijani-retry-api.onrender.com`)
+
+**Option B: Manual Web Service**
+
+1. Go to [render.com](https://render.com) → **New** → **Web Service**
 2. Connect your GitHub repo
 3. Settings:
    - **Root Directory**: `backend`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `python -m app.seed_data && uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-4. Deploy. Note the URL (e.g. `https://your-app.onrender.com`)
+4. Deploy. Note the URL.
 
-> **SQLite on Render**: The free tier has ephemeral disks—data resets on redeploy. For persistence, use a PostgreSQL DB (Render offers one). The current app uses SQLite; a production version would switch to Postgres.
+> **SQLite on Render**: The free tier has ephemeral disks—data resets on spin-down/redeploy. Fine for demos.
 
 ## 3. Deploy Frontend (Vercel)
 
@@ -31,7 +38,7 @@ The API needs to run somewhere. **Render** (free tier) works well:
 2. Import your GitHub repo
 3. Configure:
    - **Root Directory**: `frontend` (click Edit, set to `frontend`)
-   - **Environment Variable**: Add `VITE_API_URL` = `https://YOUR-RENDER-APP.onrender.com/api` (your backend URL)
+   - **Environment Variable**: Add `VITE_API_URL` = `https://YOUR-RENDER-APP.onrender.com/api` (e.g. `https://kijani-retry-api.onrender.com/api`)
 4. Click **Deploy**
 
 ### Option B: Vercel CLI

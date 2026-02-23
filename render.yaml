@@ -1,0 +1,11 @@
+# Render Blueprint - Backend API for Kijani Retry Hub
+# Deploy: render.com → New → Blueprint → Connect repo
+services:
+  - type: web
+    name: kijani-retry-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.seed_data && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
