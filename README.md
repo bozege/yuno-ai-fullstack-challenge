@@ -31,6 +31,10 @@ npm run dev
 
 The app runs at **http://localhost:5173**.
 
+### Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for deploying to GitHub, Render (backend), and Vercel (frontend).
+
 ---
 
 ## Features
